@@ -1,6 +1,6 @@
 @ECHO OFF
-setlocal EnableExtensions
 setlocal EnableDelayedExpansion
+REM A number guessing game
 
 :STARTGAME
 SET /a NUMBER = (%RANDOM%*1000/32768)+1
@@ -31,11 +31,11 @@ GOTO :CHECKGUESS
 :ENDGAME
 IF !ANSWER!==1 (
 	ECHO You Won in !NUMGUESSES! Guesses!
-	ECHO "Got !NUMBER! in !NUMGUESSES! guesses" >> scoreboard.txt
+	SET/p NAME="Enter your name for the scoreboard"
+	ECHO "!NAME! Got !NUMBER! in !NUMGUESSES! guesses" >> scoreboard.txt
 )
 IF !ANSWER!==0 ECHO Sorry, You Lose. The number was %NUMBER%.
 SET /p TRYAGAIN=Play Again? enter y or n:
 IF  %TRYAGAIN%==y (CALL :STARTGAME)
 ECHO BYE!
 END
-
